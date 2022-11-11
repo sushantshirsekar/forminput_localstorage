@@ -1,7 +1,7 @@
 body{
     
-    margin-top: 141px;
-    background-image: url('background.jpg') ;
+    margin-top: 0px;
+    background-image: url('background.jpg');
     background-size: cover;
 }
 h2,form{
@@ -32,5 +32,13 @@ input{
     width: 280px;
     padding: 3px;
     color: black;
+}
+
+#data{
+    height: auto;
+    width: auto;
+}
+.btn{
+    background-color: red;
 }
  
