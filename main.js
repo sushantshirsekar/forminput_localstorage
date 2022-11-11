@@ -1,3 +1,5 @@
+
+
 const formInput = document.querySelector('#my_form');
         const firstN = document.querySelector('#fname');
         const mailInput = document.querySelector('#mail');
@@ -8,6 +10,7 @@ const formInput = document.querySelector('#my_form');
         
 
         formInput.addEventListener('submit', addValues)
+        let details = [];
 
         function addValues(e) {
             e.preventDefault();
@@ -18,11 +21,18 @@ const formInput = document.querySelector('#my_form');
                 setTimeout(() => msg.remove(), 3000);
             }
 
-            localStorage.setItem('name', firstN.value);
-            localStorage.setItem('mail', mailInput.value);
-            localStorage.setItem('phone', phoneInput.value);
-            localStorage.setItem('time', timeInput.value);
+            let myObj = {
+                name: firstN.value,
+                mail: mailInput.value,
+                phone: phoneInput.value,
+                time: timeInput.value
+            }
+            
+            details.push(myObj);
+            
 
+            localStorage.setItem('user', JSON.stringify(details));
+            
 
             afterSubmit.innerHTML = 'Success!!';
             setTimeout(() => afterSubmit.remove(), 3000);
