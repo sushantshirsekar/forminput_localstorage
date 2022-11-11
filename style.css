@@ -36,9 +36,18 @@ input{
 
 #data{
     height: auto;
-    width: auto;
+    
 }
 .btn{
     background-color: red;
+    border: 0.5px solid black;
+}
+.edit{
+    background-color: skyblue;
+    border: 0.5px solid black;
+}
+.listData{
+    text-align: center;
+    list-style: none;
 }
  
