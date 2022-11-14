@@ -1,74 +1,77 @@
+let nameInput = document.getElementById('name');
+let emailInput = document.getElementById('emailId');
+let phoneInput = document.getElementById('phone');
+let afterSubmit = document.querySelector('.submit');
+let formInput = document.getElementById('myForm');
+let display = document.getElementById('users');
+
+// formInput.addEventListener('submit', saveDetails);
+function saveDetails(event)
+{
+    event.preventDefault();
+    let name = event.target.name.value;
+    let mail = event.target.email.value;
+    let contact = event.target.contact.value;
+
+    let newObj = {
+        name,
+        mail,
+        contact
+    }
+    // let stringDetails = JSON.stringify(newObj);
+    localStorage.setItem(newObj.mail, JSON.stringify(newObj));
+    displayDetails(newObj);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    const localStorageObj = localStorage;
+    const localstoragekeys  = Object.keys(localStorageObj)
+
+    for(var i =0; i< localstoragekeys.length; i++){
+        const key = localstoragekeys[i]
+        const userDetailsString = localStorageObj[key];
+        const userDetailsObj = JSON.parse(userDetailsString);
+        displayDetails(userDetailsObj)
+    }
+})
+function displayDetails(user)
+{
+    document.getElementById('name').value = '';
+    document.getElementById('emailId').value = '';
+    document.getElementById('phone').value = '';
+    if(localStorage.getItem(user.mail) == null){
+        removeDisplay(user.mail)
+    }
+    const parentNode = document.getElementById('users');
+    const childHtml = `<li class="user-list" id=${user.mail}>${user.name} ${user.mail} ${user.contact}<br>
+    <button class="btn" onclick=deleteDetails('${user.mail}')> Delete </button>
+    <button class="btn" onclick=editDetails('${user.mail}','${user.name}','${user.contact}')> Edit </button>
+    </li>`
+    parentNode.innerHTML = parentNode.innerHTML + childHtml;
+}
+function editDetails(email,name,phone)
+{
+    document.getElementById('emailId').value = email;
+    document.getElementById('name').value = name;
+    document.getElementById('phone').value = phone;
+    deleteDetails(email);
+}
+function deleteDetails(mail)
+{
+    localStorage.removeItem(mail);
+    removeDisplay(mail);
+}
+
+function removeDisplay(mail)
+{
+    const parentNode = document.getElementById('users');
+    const childNodeDelete = document.getElementById(mail);
+    if(childNodeDelete)
+    {
+    parentNode.removeChild(childNodeDelete);
+    }
+}
 
 
-const formInput = document.querySelector('#my_form');
-        const firstN = document.querySelector('#fname');
-        const mailInput = document.querySelector('#mail');
-        const phoneInput = document.querySelector('#phone');
-        const timeInput = document.querySelector('#time');
-        const msg = document.querySelector('.msg');
-        const afterSubmit = document.querySelector('.submitted');
-        
-        let dataAvail = document.getElementById('items');
-
-        dataAvail.addEventListener('click' , deleteData);
-
-        function deleteData(e)
-        {
-            if(e.target.classList.contains('btn'))
-            {
-                confirm('Are you sure?')
-                {
-                    let li = e.target.parentElement;
-                    dataAvail.removeChild(li);
-                }
-            }
-        }
-        
-        
-        
-
-        
-
-        formInput.addEventListener('submit', addValues)
-        let details = [];
-
-        function addValues(e) {
-            e.preventDefault();
-            if (firstN.value === '' || mailInput.value === '' || phoneInput.value === '' || timeInput.value === '')
-            {
-                msg.innerHTML = '<p>Please Enter all fields</p>';
-
-                setTimeout(() => msg.remove(), 3000);
-            }
-            let obj = {
-                name : firstN.value,
-                mail : mailInput.value,
-                phone: phoneInput.value,
-                time: timeInput.value
-            }
-            localStorage.setItem(mail, JSON.stringify(obj));
-
-            getUserInfo(obj);   
 
 
-
-        }
-
-        function getUserInfo(user)
-        {
-            let childHtml = `<li class = "listData">${user.name} ${user.mail} ${user.phone} will arrive at ${user.time}<br> <button class = "btn"> Delete</button>  <button class = "edit"> Edit</button> </li>`
-            dataAvail.innerHTML = dataAvail.innerHTML + childHtml;
-
-        }
-        
-        function deleteData(e)
-        {
-            if(e.target.classList.contains = "btn"){
-                console.log('Deleted');
-                let li =e.target.parentElement;
-                dataAvail.removeChild(li);
-            }
-        }
-
-
-        

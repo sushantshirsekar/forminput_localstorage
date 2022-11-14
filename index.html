@@ -16,27 +16,19 @@
     <section class="container">
         <h2>Book a Call</h2>
         <div class="msg"></div>
-        <form id="my_form">
+        <form id="my_form" onsubmit="saveDetails(event)">
 
             <label for="fname">First Name:</label><br>
-
-            <input type="text" id="fname" placeholder="First Name" name="first"><br><br>
+            <input type="text" id="name" name="name" required><br><br>
 
             <label for="mail">Email:</label><br>
-
-            <input type="email" id="mail" placeholder="E-mail" name="mailId"><br><br>
+            <input type="email" id="emailId" placeholder="E-mail" name="email" required><br><br>
 
             <label for="phone">Contact Number:</label><br>
-
-            <input type="tel" id="phone" placeholder="Number" name="info"><br><br>
-
-            <label for="time">Time:</label><br>
+            <input type="tel" id="phone" name="contact" required><br><br>
 
 
-
-            <input type="time" id="time" name="time"><br><br>
-
-            <button type="submit" value="submit">Submit</button><br>
+            <button>Submit</button><br>
 
         </form>
         <div class="submitted"></div>
@@ -46,7 +38,7 @@
     </section><br>
     <div id="data" class="container">
         <h2 class="data-header">Booked Appointments</h2><br>
-        <ul id="items">
+        <ul id="users">
             
         </ul>
         <span class="insertbeforespan"></span>
